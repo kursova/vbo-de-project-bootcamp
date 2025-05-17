@@ -1,5 +1,5 @@
 brew install helm
-helm version
+helm version deneme
 
 brew install kubectl
 kubectl version --client
