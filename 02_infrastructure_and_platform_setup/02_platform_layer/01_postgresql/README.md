@@ -45,6 +45,7 @@ cnpg/cluster
 ```commandline
  kubectl get secret -n cnpg-database cnpg-cluster-superuser -o jsonpath='{.data.password}' | base64 -d
 ```
+YDPXTUqVKeCVHdB69Si7osv1nxlNNcMfw1nzjNJH1jugKX35U9UreSvwfH8dsPKR
 
 ## Connect to psql on db pod
 ```commandline
