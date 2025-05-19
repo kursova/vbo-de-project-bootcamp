@@ -1,0 +1,43 @@
+image:
+  repository: ghcr.io/projectnessie/nessie
+  tag: "0.103.0"
+  pullPolicy: IfNotPresent
+
+service:
+  port: 19120
+
+extraEnv:
+  # Nessie version store configuration (PostgreSQL)
+  - name: NESSIE_VERSION_STORE_TYPE
+    value: "JDBC"
+  - name: NESSIE_VERSION_STORE_PERSIST_JDBC_DATASOURCE
+    value: "postgresql"
+  - name: QUARKUS_DATASOURCE_POSTGRESQL_JDBC_URL
+    value: "jdbc:postgresql://cnpg-cluster-rw.cnpg-database.svc.cluster.local:5432/nessie"
+  - name: QUARKUS_DATASOURCE_POSTGRESQL_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: nessie-postgres-minio-creds
+        key: username
+  - name: QUARKUS_DATASOURCE_POSTGRESQL_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: nessie-postgres-minio-creds
+        key: password
+  # MinIO configuration for Iceberg tables
+  - name: NESSIE_CATALOG_SERVICE_S3_ENDPOINT
+    value: "http://minio.minio.svc.cluster.local:9000"
+  - name: NESSIE_CATALOG_SERVICE_S3_ACCESS_KEY_NAME
+    valueFrom:
+      secretKeyRef:
+        name: nessie-postgres-minio-creds
+        key: NESSIE_CATALOG_SERVICE_S3_ACCESS_KEY_NAME
+  - name: NESSIE_CATALOG_SERVICE_S3_ACCESS_KEY_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: nessie-postgres-minio-creds
+        key: NESSIE_CATALOG_SERVICE_S3_ACCESS_KEY_SECRET
+  - name: NESSIE_CATALOG_SERVICE_S3_PATH_STYLE_ACCESS
+    value: "true"
+  - name: NESSIE_CATALOG_DEFAULT_WAREHOUSE_DIR
+    value: "s3://warehouse/"
