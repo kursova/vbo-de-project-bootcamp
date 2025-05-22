@@ -1,0 +1,59 @@
+# trino-values.yaml
+image:
+  repository: trinodb/trino
+  tag: 474
+  pullPolicy: IfNotPresent
+
+server:
+  workers: 2 # Adjust based on your resources
+  config:
+    memory: "4GB" # Adjust for your local setup
+    query:
+      maxMemory: "2GB"
+      maxMemoryPerNode: "1GB"
+
+coordinator:
+  config:
+    discovery:
+      uri: http://trino.trino.svc.cluster.local:8080 # Internal service name
+    httpServer:
+      http:
+        port: 8080
+
+service:
+  type: NodePort
+  port: 8080
+  nodePort: 30080 # Expose Trino UI and client on port 30080
+
+additionalCatalogs:
+  # PostgreSQL connector for your cnpg-cluster
+  postgresql: |
+    connector.name=postgresql
+    connection-url=jdbc:postgresql://cnpg-cluster-rw.cnpg-database.svc.cluster.local:5432/traindb
+    connection-user=train
+    connection-password=Ankara06
+
+  # Iceberg connector with Nessie catalog and MinIO storage
+  iceberg: |
+    connector.name=iceberg
+    iceberg.catalog.type=nessie
+    iceberg.nessie-catalog.uri=http://nessie.nessie.svc.cluster.local:19120/api/v2
+    iceberg.nessie-catalog.ref=main
+    iceberg.nessie-catalog.default-warehouse-dir=s3://warehouse/
+    fs.native-s3.enabled=true
+    s3.path-style-access=true
+    s3.region=us-east-1
+    s3.endpoint=http://minio.minio.svc.cluster.local:9000
+    s3.aws-access-key=HaQvZ3oKOtrwRMhyfqL7
+    s3.aws-secret-key=0NwIqGi407ClKF3M7bDmdrOhd94fC0OQOYBO54em
+
+environment:
+  JAVA_OPTS: "-Xmx4G -Xms4G" # Adjust JVM memory
+
+resources:
+  requests:
+    memory: "4Gi"
+    cpu: "1"
+  limits:
+    memory: "6Gi"
+    cpu: "2"
