@@ -5,9 +5,9 @@ image:
   pullPolicy: IfNotPresent
 
 server:
-  workers: 2 # Adjust based on your resources
+  workers: 1 # Adjust based on your resources
   config:
-    memory: "4GB" # Adjust for your local setup
+    memory: "3GB" # Adjust for your local setup
     query:
       maxMemory: "2GB"
       maxMemoryPerNode: "1GB"
@@ -44,16 +44,16 @@ additionalCatalogs:
     s3.path-style-access=true
     s3.region=us-east-1
     s3.endpoint=http://minio.minio.svc.cluster.local:9000
-    s3.aws-access-key=HaQvZ3oKOtrwRMhyfqL7
-    s3.aws-secret-key=0NwIqGi407ClKF3M7bDmdrOhd94fC0OQOYBO54em
+    s3.aws-access-key=elVD6KrhSQ1lQe2zu4kh
+    s3.aws-secret-key=5m6E27W3ruNjDVpb0GTDOYTbmoAFmZYRYgBTwmOx
 
 environment:
-  JAVA_OPTS: "-Xmx4G -Xms4G" # Adjust JVM memory
+  JAVA_OPTS: "-Xmx3G -Xms3G" # Adjust JVM memory
 
 resources:
   requests:
     memory: "4Gi"
     cpu: "1"
   limits:
-    memory: "6Gi"
+    memory: "4Gi"
     cpu: "2"

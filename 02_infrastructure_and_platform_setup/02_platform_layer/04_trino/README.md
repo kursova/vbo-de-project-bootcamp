@@ -18,8 +18,8 @@ GRANT ALL PRIVILEGES ON SCHEMA public TO train;
 ```
 ## 4. Create access keys for connecting minio
 - Open minio UI
-- Access key: `HaQvZ3oKOtrwRMhyfqL7`
-- Secret key: `0NwIqGi407ClKF3M7bDmdrOhd94fC0OQOYBO54em`
+- Access key: elVD6KrhSQ1lQe2zu4kh
+- Secret key: 5m6E27W3ruNjDVpb0GTDOYTbmoAFmZYRYgBTwmOx
 
 ## 5. Helm chart install
 ```commandline
