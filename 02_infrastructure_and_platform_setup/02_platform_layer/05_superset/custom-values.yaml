@@ -24,7 +24,7 @@ bootstrapScript: |
 
 # Extra environment variables
 extraEnv:
-  SUPERSET_SECRET_KEY: "oTiQw735K+2ySvdGQH4qTqM0mVN+V4ynt++kyvs7nEkOsSk7I9Mdd5c3"  # Generated with openssl rand -base64 42
+  SUPERSET_SECRET_KEY: "GvXpxg7G1nMQaqVp4zVt0L2Yh88aZaXEKQqS8hIcF6Hk+mofMov4OTw7"  # Generated with openssl rand -base64 42
 
 # Service configuration (moved to top level per official values.yaml)
 service:
@@ -37,7 +37,7 @@ service:
 configOverrides:
   superset_config: |
     SQLALCHEMY_DATABASE_URI = "postgresql+psycopg2://superset:superset@cnpg-cluster-rw.cnpg-database.svc.cluster.local:5432/superset"
-    SECRET_KEY = "oTiQw735K+2ySvdGQH4qTqM0mVN+V4ynt++kyvs7nEkOsSk7I9Mdd5c3"
+    SECRET_KEY = "GvXpxg7G1nMQaqVp4zVt0L2Yh88aZaXEKQqS8hIcF6Hk+mofMov4OTw7"
     CACHE_CONFIG = {
         "CACHE_TYPE": "redis",
         "CACHE_REDIS_URL": "redis://superset-redis-master.superset.svc.cluster.local:6379/0",

@@ -23,7 +23,7 @@ GRANT ALL PRIVILEGES ON schema public TO superset;
 ```commandline
 openssl rand -base64 42
 
-oTiQw735K+2ySvdGQH4qTqM0mVN+V4ynt++kyvs7nEkOsSk7I9Mdd5c3
+GvXpxg7G1nMQaqVp4zVt0L2Yh88aZaXEKQqS8hIcF6Hk+mofMov4OTw7
 ```
 
 ### 2.2. custom yaml file
