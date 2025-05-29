@@ -1,0 +1,141 @@
+# Custom values for Apache Airflow Helm chart
+# Chart: apache-airflow/airflow (https://airflow.apache.org)
+
+# Airflow global settings
+executor: KubernetesExecutor
+defaultAirflowRepository: apache/airflow
+defaultAirflowTag: "2.10.5"
+
+# Airflow configuration
+webserverSecretKey: "c77e188ec8eac0e03008cce629440dda"  # import secrets; print(secrets.token_hex(16))
+
+# Database configuration - external PostgreSQL
+data:
+  metadataConnection:
+    user: airflow
+    pass: Ankara06
+    protocol: postgresql
+    host: cnpg-cluster-rw.cnpg-database.svc.cluster.local
+    port: 5432
+    db: airflow
+    sslmode: disable
+
+# Webserver configuration
+webserver:
+  defaultUser:
+    enabled: true
+    role: Admin
+    username: admin
+    email: admin@example.com
+    firstName: Admin
+    lastName: User
+    password: admin
+  service:
+    type: NodePort
+    ports:
+      - name: airflow-ui
+        port: 8080
+        targetPort: 8080
+        nodePort: 31880
+  startupProbe:
+    initialDelaySeconds: 60
+    periodSeconds: 10
+    failureThreshold: 20
+  resources:
+    requests:
+      cpu: "500m"
+      memory: "1Gi"
+    limits:
+      cpu: "1"
+      memory: "2Gi"
+
+# Scheduler configuration
+scheduler:
+  resources:
+    requests:
+      cpu: "400m"
+      memory: "512Mi"
+    limits:
+      cpu: "1000m"
+      memory: "1024Mi"
+workers:
+  resources:
+    requests:
+      cpu: 300m
+      memory: 1Gi
+    limits:
+      cpu: 500m
+      memory: 2Gi
+
+config:
+  core:
+    executor: KubernetesExecutor
+    load_examples: "False"
+  kubernetes_executor:
+    namespace: airflow
+
+# Disable embedded PostgreSQL
+postgresql:
+  enabled: false
+
+# DAGs and persistence configuration
+dags:
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClassName: hostpath
+    accessMode: ReadWriteOnce
+  gitSync:
+    enabled: true
+    repo: https://github.com/erkansirin78/vbo-de-project-bootcamp-1.git  # Your GitHub repo URL
+    branch: main  # The branch to sync (e.g., main, master, or a specific branch)
+    ref: main  # The git revision (branch, tag, or hash) to check out
+    subPath: airflow/dags  # Subdirectory in the repo containing DAGs (set to "" if DAGs are at root)
+    period: 60s  # Sync interval (e.g., every 60 seconds)
+    maxFailures: 3  # Number of consecutive failures before aborting
+    depth: 1  # Shallow clone depth for faster sync
+    credentialsSecret: git-credentials
+    containerName: git-sync
+    uid: 65533  # User ID for git-sync container
+    securityContext:
+      runAsUser: 65533
+      runAsGroup: 0
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+
+# Logs persistence
+logs:
+  persistence:
+    enabled: true
+    size: 10Gi
+    storageClassName: hostpath
+
+# Disable unnecessary components
+triggerer:
+  enabled: false
+redis:
+  enabled: false
+flower:
+  enabled: false
+statsd:
+  enabled: false
+pgbouncer:
+  enabled: false
+dagProcessor:
+  enabled: false
+
+# Security context
+securityContext:
+  fsGroup: 0
+  runAsUser: 50000
+  runAsGroup: 0
+
+# Ensure PostgreSQL compatibility
+extraPipPackages:
+  - "psycopg2-binary"
+  - "apache-airflow-providers-cncf-kubernetes"
