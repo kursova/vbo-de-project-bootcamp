@@ -35,9 +35,9 @@ helm repo update
 ```commandline
 kubectl create secret generic git-credentials -n airflow \
   --from-literal=GITSYNC_USERNAME=kursova \
-  --from-literal=GITSYNC_PASSWORD=github_pat_11ACMEIMQ0MzNtmcDKfn2V_q8vjxJ96iwBM0G2jK5Ou1IuiGuaHZImesGiPSa1JfxcRODZOI \
+  --from-literal=GITSYNC_PASSWORD=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 \
   --from-literal=GIT_SYNC_USERNAME=kursova \
-  --from-literal=GIT_SYNC_PASSWORD=github_pat_11ACMEIMQ0MzNtmcDKfn2V_q8vjxJ96iwBM0G2jK5Ou1IuiGuaHZImesGiPSa1JfxcRODZOI
+  --from-literal=GIT_SYNC_PASSWORD=g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
 ```
 ### Create airflow/dags
 - In the project root directory
