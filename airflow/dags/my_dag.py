@@ -21,4 +21,4 @@ with DAG('my_dag', default_args=default_args, schedule_interval='@daily', catchu
     t2 = BashOperator(task_id='task2', bash_command='echo "Hello! I am task3"',
                       retries=2, retry_delay=timedelta(seconds=15))
 
-    t0 >> t1 >> t2
+    t0 >> t1 >> t1
