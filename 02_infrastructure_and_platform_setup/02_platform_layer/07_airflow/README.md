@@ -34,10 +34,10 @@ helm repo update
 - Go github greate a token (classic) give repo permission
 ```commandline
 kubectl create secret generic git-credentials -n airflow \
-  --from-literal=GITSYNC_USERNAME=<username> \
-  --from-literal=GITSYNC_PASSWORD=<your-github-token> \
-  --from-literal=GIT_SYNC_USERNAME=<username> \
-  --from-literal=GIT_SYNC_PASSWORD=<your-github-token>
+  --from-literal=GITSYNC_USERNAME=kursova \
+  --from-literal=GITSYNC_PASSWORD=github_pat_11ACMEIMQ0MzNtmcDKfn2V_q8vjxJ96iwBM0G2jK5Ou1IuiGuaHZImesGiPSa1JfxcRODZOI \
+  --from-literal=GIT_SYNC_USERNAME=kursova \
+  --from-literal=GIT_SYNC_PASSWORD=github_pat_11ACMEIMQ0MzNtmcDKfn2V_q8vjxJ96iwBM0G2jK5Ou1IuiGuaHZImesGiPSa1JfxcRODZOI
 ```
 ### Create airflow/dags
 - In the project root directory

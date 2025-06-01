@@ -7,7 +7,7 @@ defaultAirflowRepository: apache/airflow
 defaultAirflowTag: "2.10.5"
 
 # Airflow configuration
-webserverSecretKey: "c77e188ec8eac0e03008cce629440dda"  # import secrets; print(secrets.token_hex(16))
+webserverSecretKey: "e18ebdf071d283069714b803b395de86b28"  # python3 -c "import secrets; print(secrets.token_hex(16))"
 
 # Database configuration - external PostgreSQL
 data:
@@ -87,7 +87,7 @@ dags:
     accessMode: ReadWriteOnce
   gitSync:
     enabled: true
-    repo: https://github.com/erkansirin78/vbo-de-project-bootcamp-1.git  # Your GitHub repo URL
+    repo: https://github.com/kursova/vbo-de-project-bootcamp.git  # Your GitHub repo URL
     branch: main  # The branch to sync (e.g., main, master, or a specific branch)
     ref: main  # The git revision (branch, tag, or hash) to check out
     subPath: airflow/dags  # Subdirectory in the repo containing DAGs (set to "" if DAGs are at root)
