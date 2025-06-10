@@ -85,6 +85,7 @@ def upload_to_s3(local_dir: Path, bucket_name: str, s3_prefix: str, s3_client=No
     for root, _, files in os.walk(local_dir):
         for file in files:
             files_found = True
+            local_file_path=Path(root) / file
             rel_path = local_file_path.relative_to(local_dir)
             s3_key   = f"{s3_prefix}/{rel_path.as_posix()}"
 
@@ -96,4 +97,10 @@ def upload_to_s3(local_dir: Path, bucket_name: str, s3_prefix: str, s3_client=No
                 logger.exception(f"❌ Failed to upload {local_file_path}: {e}")
 
     if not files_found:
-        logger.warning(f"No files found in {local_dir} to upload.")
+        logger.warning(f"No files found in {local_dir} to upload.") 
+
+
+
+""" if __name__=='__main__':
+    s3_client=get_boto3_client('s3', AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY,REGION_NAME,S3_ENDPOINT_URL)
+    download_github_dir(REPO_OWNER,'datasets','yellow_tripdata_partitioned_by_day/year=2023/month=10/day=1/', 'master', 'data', GITHUB_TOKEN) """

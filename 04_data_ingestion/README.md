@@ -15,9 +15,15 @@ pip 25.1.1 from /home/train/.local/lib/python3.12/site-packages/pip (python 3.12
 ```
 - Create virtual env.
 ```commandline
-
+python -m virtualenv .venv_ingest
+source .venv_ingest/bin/activate
 ```
 # 2.  Install dependencies
 ```commandline
-pytho
+pip install -r requirements.txt
 ```
+
+# create a .venv file
+
+
+# development and local tests
