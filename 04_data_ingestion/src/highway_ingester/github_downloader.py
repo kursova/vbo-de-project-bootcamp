@@ -101,6 +101,3 @@ def upload_to_s3(local_dir: Path, bucket_name: str, s3_prefix: str, s3_client=No
 
 
 
-""" if __name__=='__main__':
-    s3_client=get_boto3_client('s3', AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY,REGION_NAME,S3_ENDPOINT_URL)
-    download_github_dir(REPO_OWNER,'datasets','yellow_tripdata_partitioned_by_day/year=2023/month=10/day=1/', 'master', 'data', GITHUB_TOKEN) """
