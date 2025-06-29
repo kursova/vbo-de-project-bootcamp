@@ -126,6 +126,3 @@ docker push ghcr.io/$YOUR_USERNAME/github-ingester:latest
 ```
 
 ### Write your DAG (`dags/github_to_s3_dag.py`)
-
-docker push ghcr.io/kursova/github-ingester kursova/github-ingester:1.1
-docker push kursova/github-ingester:1.1
