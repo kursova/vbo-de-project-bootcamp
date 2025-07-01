@@ -1,0 +1,4 @@
+
+pandas
+python-dotenv
+pyspark==3.5.3
