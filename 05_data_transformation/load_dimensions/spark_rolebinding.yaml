@@ -1,0 +1,40 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: spark-rolebinding
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: airflow-worker
+    namespace: airflow
+roleRef:
+  kind: Role
+  name: spark-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: spark-app-rolebinding
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: airflow-worker
+    namespace: airflow
+roleRef:
+  kind: Role
+  name: spark-app-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: spark-app-full-access-binding
+subjects:
+  - kind: ServiceAccount
+    name: airflow-worker
+    namespace: airflow
+roleRef:
+  kind: ClusterRole
+  name: spark-app-full-access
+  apiGroup: rbac.authorization.k8s.io
