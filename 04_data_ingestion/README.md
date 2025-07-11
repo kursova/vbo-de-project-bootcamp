@@ -126,3 +126,7 @@ docker push ghcr.io/$YOUR_USERNAME/github-ingester:latest
 ```
 
 ### Write your DAG (`dags/github_to_s3_dag.py`)
+
+
+echo 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 | docker login ghcr.io -u kursova --password-stdin
+dckr_pat_rdy9ARCDxXeWyKYMlKF7OU9uyUQ
